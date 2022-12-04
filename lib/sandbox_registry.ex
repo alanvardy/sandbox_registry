@@ -37,7 +37,7 @@ defmodule SandboxRegistry do
 
   @type registry :: atom
   @type context :: atom | String.t()
-  @type state :: map
+  @type state :: any
   @type keys :: :duplicate | :unique
   @type result :: {:error, :pid_not_registered | :registry_not_started} | {:ok, map}
 
@@ -59,7 +59,7 @@ defmodule SandboxRegistry do
 
   """
   @spec register(registry, context, state, keys) :: :ok | {:error, :registry_not_started}
-  def register(registry, context, state, :unique) when is_map(state) do
+  def register(registry, context, state, :unique) do
     Process.sleep(@sleep)
 
     with pid when is_pid(pid) <- Process.whereis(registry),
@@ -74,7 +74,7 @@ defmodule SandboxRegistry do
     end
   end
 
-  def register(registry, context, state, :duplicate) when is_map(state) do
+  def register(registry, context, state, :duplicate) do
     case Process.whereis(registry) do
       nil ->
         {:error, :registry_not_started}
