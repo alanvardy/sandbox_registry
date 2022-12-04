@@ -1,4 +1,6 @@
 # SandboxRegistry
+[![Dialyzer](https://github.com/MikaAK/sandbox_registry/actions/workflows/dialyzer.yml/badge.svg)](https://github.com/MikaAK/sandbox_registry/actions/workflows/dialyzer.yml)
+[![Credo](https://github.com/MikaAK/sandbox_registry/actions/workflows/credo.yml/badge.svg)](https://github.com/MikaAK/sandbox_registry/actions/workflows/credo.yml)
 
 We can use the sandbox registry to help create sandboxes for testing
 
