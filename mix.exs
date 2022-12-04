@@ -35,7 +35,7 @@ defmodule SandboxRegistry.MixProject do
       maintainers: ["Mika Kalathil"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/mikaak/sandbox_registry"},
-      files: ~w(mix.exs README.md CHANGELOG.md LICENSE lib config)
+      files: ~w(mix.exs README.md CHANGELOG.md LICENSE lib)
     ]
   end
 
