@@ -12,14 +12,12 @@ defmodule SandboxRegistry.MixProject do
       docs: docs(),
       package: package(),
       test_coverage: [tool: ExCoveralls],
-
       dialyzer: [
         plt_add_apps: [:ex_unit, :mix, :credo, :jason],
         list_unused_filters: true,
         plt_local_path: ".check",
         plt_core_path: ".check"
       ],
-
       preferred_cli_env: [
         dialyzer: :test,
         coveralls: :test,
@@ -58,7 +56,6 @@ defmodule SandboxRegistry.MixProject do
     [
       {:ex_doc, ">= 0.0.0", optional: true, only: :dev},
       {:dialyxir, "~> 1.0", optional: true, only: :test, runtime: false},
-
       {:credo, "~> 1.6", only: [:test, :dev], runtime: false},
       {:blitz_credo_checks, "~> 0.1", only: [:test, :dev], runtime: false}
     ]
