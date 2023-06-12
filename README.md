@@ -3,6 +3,7 @@
 [![Credo](https://github.com/alanvardy/sandbox_registry/actions/workflows/credo.yml/badge.svg)](https://github.com/alanvardy/sandbox_registry/actions/workflows/credo.yml)
 [![Build Status](https://github.com/alanvardy/sandbox_registry/actions/workflows/test.yml/badge.svg)](https://github.com/alanvardy/sandbox_registry/actions/workflows/test.yml)
 [![Build Status](https://github.com/alanvardy/sandbox_registry/actions/workflows/coverage.yml/badge.svg)](https://github.com/alanvardy/sandbox_registry/actions/workflows/coverage.yml)
+[![Build Status](https://github.com/alanvardy/sandbox_registry/actions/workflows/doctor.yml/badge.svg)](https://github.com/alanvardy/sandbox_registry/actions/workflows/doctor.yml)
 
 
 We can use the sandbox registry to help create sandboxes for testing
