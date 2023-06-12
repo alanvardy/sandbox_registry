@@ -15,8 +15,8 @@ defmodule SandboxRegistry.MixProject do
       dialyzer: [
         plt_add_apps: [:ex_unit, :mix, :credo, :jason],
         list_unused_filters: true,
-        plt_local_path: ".check",
-        plt_core_path: ".check"
+        plt_local_path: "dialyzer",
+        plt_core_path: "dialyzer"
       ],
       preferred_cli_env: [
         dialyzer: :test,
