@@ -231,7 +231,7 @@ by adding `sandbox_registry` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:sandbox_registry, "~> 0.1.0"}
+    {:sandbox_registry, "~> 0.1.1"}
   ]
 end
 ```
