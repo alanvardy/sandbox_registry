@@ -27,7 +27,7 @@ defmodule HTTPSandbox do
   @registry :http_sandbox
   @keys :unique
   # state is a sub-key to allow multiple contexts to use the same registry
-  @state "http"
+  @state %{state: "http"}
   @sleep 10  
 
   def start_link do

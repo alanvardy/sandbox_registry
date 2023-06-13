@@ -18,7 +18,7 @@ defmodule SandboxRegistry do
   2. Set the state in a setup block or within the test itself
 
   ```elixir
-  SandboxRegistry.register(:some_registry, :my_context, %{key1: "value", key2: "other_value}, :duplicate)
+  SandboxRegistry.register(:some_registry, :my_context, %{key1: "value", key2: "other_value"}, :duplicate)
   ```
 
   3. Access the state from anywhere in the application. SandboxRegistry functions are not available outside of test.
