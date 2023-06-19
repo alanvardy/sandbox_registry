@@ -238,3 +238,8 @@ end
 
 The docs can be found at <https://hexdocs.pm/sandbox_registry>.
 
+
+## Note for contributors
+
+This project utilizes `ex_check`. For your convenience, you can run all checking tools with 
+a single `mix check` command.
