@@ -80,12 +80,14 @@ defmodule SandboxRegistryTest do
     end
   end
 
-
   defp start_registry(count \\ 0)
   defp start_registry(10), do: {:error, :could_not_start_registry}
+
   defp start_registry(count) do
     case Registry.start_link(keys: @keys, name: @registry) do
-      {:ok, _} -> :ok
+      {:ok, _} ->
+        :ok
+
       _ ->
         Process.sleep(@sleep)
         start_registry(count + 1)

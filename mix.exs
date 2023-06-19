@@ -20,6 +20,7 @@ defmodule SandboxRegistry.MixProject do
       ],
       preferred_cli_env: [
         dialyzer: :test,
+        check: :test,
         coveralls: :test,
         "coveralls.detail": :test,
         "coveralls.post": :test,
@@ -60,7 +61,8 @@ defmodule SandboxRegistry.MixProject do
       {:credo, "~> 1.6", only: [:test, :dev], runtime: false},
       {:blitz_credo_checks, "~> 0.1", only: [:test, :dev], runtime: false},
       {:excoveralls, "~> 0.16", only: [:test], runtime: false},
-      {:doctor, "~> 0.21.0", only: :test}
+      {:doctor, "~> 0.21.0", only: :test},
+      {:ex_check, "~> 0.15", only: :test, runtime: false}
     ]
   end
 end
