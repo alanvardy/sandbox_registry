@@ -60,6 +60,19 @@ defmodule SandboxRegistryTest do
 
       assert {:ok, %{state: "http"}} = SandboxRegistry.lookup(@registry, @context)
     end
+
+    test "can access state from a child process" do
+      SandboxRegistry.register(
+        @registry,
+        @context,
+        @state,
+        :duplicate
+      )
+
+      Task.start(fn ->
+        assert {:ok, %{state: "http"}} = SandboxRegistry.lookup(@registry, @context)
+      end)
+    end
   end
 
   describe "&lookup/3" do
