@@ -26,8 +26,8 @@ defmodule HTTPSandbox do
   """
   @registry :http_sandbox
   @keys :unique
-  # state is a sub-key to allow multiple contexts to use the same registry
-  @state %{state: "http"}
+  # context is a sub-key to allow multiple contexts to use the same registry
+  @context "http"
   @sleep 10  
 
   def start_link do
@@ -73,7 +73,7 @@ defmodule HTTPSandbox do
   def set_get_responses(tuples) do
     tuples
     |> Map.new(fn {url, func} -> {{:get, url}, func} end)
-    |> then(&SandboxRegistry.register(@registry, @state, &1, @keys))
+    |> then(&SandboxRegistry.register(@registry, @context, &1, @keys))
     |> case do
       :ok -> :ok
       {:error, :registry_not_started} -> raise_not_started!()
@@ -88,7 +88,7 @@ defmodule HTTPSandbox do
   Returns response function or raises an error for developer
   """
   def find!(action, url) do
-    case SandboxRegistry.lookup(@registry, @state) do
+    case SandboxRegistry.lookup(@registry, @context) do
       {:ok, funcs} ->
         find_response!(funcs, action, url)
 
