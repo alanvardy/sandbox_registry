@@ -32,9 +32,9 @@ defmodule SandboxRegistry.MixProject do
 
   defp package do
     [
-      maintainers: ["Mika Kalathil"],
+      maintainers: ["Alan Vardy"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/mikaak/sandbox_registry"},
+      links: %{"GitHub" => "https://github.com/alanvardy/sandbox_registry"},
       files: ~w(mix.exs README.md CHANGELOG.md LICENSE lib)
     ]
   end
@@ -42,7 +42,7 @@ defmodule SandboxRegistry.MixProject do
   defp docs do
     [
       main: "SandboxRegistry",
-      source_url: "https://github.com/mikaak/sandbox_registry"
+      source_url: "https://github.com/alanvardy/sandbox_registry"
     ]
   end
 
