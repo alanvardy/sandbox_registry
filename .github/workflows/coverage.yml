@@ -21,14 +21,7 @@ jobs:
         with:
           elixir-version: '1.14.4' # Define the elixir version [required]
           otp-version: '25.3' # Define the OTP version [required]
-
-      - uses: nanasess/setup-chromedriver@v1
-
-      - name: Start Chromedriver
-        run: |
-          export DISPLAY=:99
-          chromedriver --url-base=/wd/hub --disable-gpu --no-sandbox --whitelisted-ips --disable-extensions --no-proxy-server --disable-software-rasterizer --headless &
-
+    
       - name: Install Rebar & Hex
         run: mix local.hex --force && mix local.rebar --force
 
