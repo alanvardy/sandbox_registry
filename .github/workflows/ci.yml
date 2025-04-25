@@ -1,0 +1,164 @@
+
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  coveralls:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v4
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-coveralls-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-coveralls-
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: 27.2
+          elixir-version: 1.18.0
+      - run: mix deps.get
+      - run: MIX_ENV=test mix coveralls.json
+      - name: Upload to codecov.io
+        uses: codecov/codecov-action@v1
+  auto-merge:
+    if: ${{ github.event_name == 'pull_request'}}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ahmadnassri/action-dependabot-auto-merge@v2
+        with:
+          target: minor
+          github-token: ${{ secrets.MYTOKEN}} 
+  dialyzer:
+    runs-on: ubuntu-latest
+
+    env:
+      MIX_ENV: test
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: 27.2
+          elixir-version: 1.18.0
+
+
+      - name: Install Rebar & Hex
+        run: mix local.hex --force && mix local.rebar --force
+
+      - name: Restore dependencies cache
+        uses: actions/cache@v3
+        with:
+          path: |
+                _build
+                deps
+                dialyzer
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}-${{ hashFiles('./.tool-versions') }}
+          restore-keys: ${{ runner.os }}-mix-
+
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile Project
+        run: mix compile
+
+      - name: Run Dialyzer
+        run: mix dialyzer
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      MIX_ENV: test
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: 27.2
+          elixir-version: 1.18.0
+
+      - uses: actions/checkout@v2
+
+      - name: Install Rebar & Hex
+        run: mix local.hex --force && mix local.rebar --force
+
+      - name: Restore dependencies cache
+        uses: actions/cache@v3
+        with:
+          path: |
+                _build
+                deps
+                .check
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}-${{ hashFiles('./.tool-versions') }}
+          restore-keys: ${{ runner.os }}-mix-
+
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile Project
+        run: mix compile
+
+      - name: Run Tests
+        run: mix test
+  doctor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v4
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-coveralls-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-coveralls-
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: 27.2
+          elixir-version: 1.18.0
+      - run: mix deps.get
+      - run: MIX_ENV=test mix doctor
+  credo:
+    runs-on: ubuntu-latest
+
+    env:
+      MIX_ENV: test
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: 27.2
+          elixir-version: 1.18.0
+
+      - name: Install Rebar & Hex
+        run: mix local.hex --force && mix local.rebar --force
+
+      - name: Restore dependencies cache
+        uses: actions/cache@v3
+        with:
+          path: |
+                _build
+                deps
+                .check
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}-${{ hashFiles('./.tool-versions') }}
+          restore-keys: ${{ runner.os }}-mix-
+
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Compile Project
+        run: mix compile
+
+      - name: Run Credo
+        run: mix credo
